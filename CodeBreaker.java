@@ -40,10 +40,14 @@ class CodeBreaker {
       str = str.copyValueOf(arr);
       return str;
     }
+    int simpleAdding(int num) {
+      if(num==0) return 0;
+      return num+simpleAdding(num-1);
+    }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    System.out.print(c.letterChanges(s.nextLine()));
+    System.out.print(c.simpleAdding(s.nextInt()));
   }
 
 }
