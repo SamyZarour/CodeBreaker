@@ -72,10 +72,13 @@ class CodeBreaker {
         else if(num1>num2) result="false";
         return result;
       }
+      String timeConvert(int num) {
+        return ""+num/60+":"+num%60;
+      }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    System.out.print(c.checkNums(s.nextInt(), s.nextInt()));
+    System.out.print(c.timeConvert(s.nextInt()));
   }
 
 }
