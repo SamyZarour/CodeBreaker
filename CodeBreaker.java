@@ -66,10 +66,16 @@ class CodeBreaker {
       }
       return answer;
     }
+    String checkNums(int num1, int num2) {
+        String result = "true";
+        if (num1==num2) result="-1";
+        else if(num1>num2) result="false";
+        return result;
+      }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    System.out.print(c.simpleSymbols(s.nextLine()));
+    System.out.print(c.checkNums(s.nextInt(), s.nextInt()));
   }
 
 }
