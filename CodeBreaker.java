@@ -44,10 +44,32 @@ class CodeBreaker {
       if(num==0) return 0;
       return num+simpleAdding(num-1);
     }
+    String firstLetterCapitalize(String str) {
+      char[] arr = str.toCharArray();
+      if((arr[0]>=65 && arr[0]<90) || (arr[0]>=97 && arr[0]<122)) arr[0]-=32;
+      for(int i=0; i<str.length(); i++){
+        if(arr[i]==32 && i<str.length()-1 && arr[i+1]!=32 && ((arr[i+1]>=65 && arr[i+1]<90) || (arr[i+1]>=97 && arr[i+1]<122))){
+          arr[i+1]-=32;
+          i++;
+        }
+      }
+      str = str.copyValueOf(arr);
+      return str;
+    }
+    boolean simpleSymbols(String str) {
+      boolean answer=true;
+      for(int i=0; i<str.length();i++){
+        if(((str.charAt(i)>=65 && str.charAt(i)<90) || (str.charAt(i)>=97 && str.charAt(i)<122)) && (i==0 || i==str.length()-1 || str.charAt(i-1)!='+' || str.charAt(i+1)!='+')) {
+          answer=false;
+          break;
+        }
+      }
+      return answer;
+    }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    System.out.print(c.simpleAdding(s.nextInt()));
+    System.out.print(c.simpleSymbols(s.nextLine()));
   }
 
 }
