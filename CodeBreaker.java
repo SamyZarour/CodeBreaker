@@ -89,10 +89,29 @@ class CodeBreaker {
     }
     return result;
   }
+  int wordCount(String str){
+    int i=0;
+    int result = 0;
+    while(str.charAt(i)==' ' && i<str.length()){
+      i++;
+    }
+    if(i<str.length()) result=1;
+    for(;i<str.length();i++){
+      if(str.charAt(i)==' ' && i<str.length()-1 && str.charAt(i+1)!=' ') result++;
+    }
+    return result;
+  }
+  boolean palindrom(String str){
+    int length = str.length();
+    for(int i=0 ;i<length/2;i++){
+      if(str.charAt(i)!=str.charAt(length-i-1)) return false;
+    }
+    return true;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    System.out.print(c.vowelCount(s.nextLine()));
+    System.out.print(c.palindrom(s.nextLine()));
   }
 
 }
