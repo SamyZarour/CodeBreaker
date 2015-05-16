@@ -108,6 +108,11 @@ class CodeBreaker {
     }
     return true;
   }
+  String ArithGeo(arr){
+    if(arr.length()<3) return "Insufficient Numbers";
+    if(arr[0]-arr[1]==arr[1]-arr[2]) return "Arithmetic";
+    if(arr[0]!=0 && arr[0]!=0 arr[0]/arr[1]==arr[1]/arr[2])
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
