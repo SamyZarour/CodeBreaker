@@ -108,20 +108,15 @@ class CodeBreaker {
     }
     return true;
   }
-  String ArithGeo(int[] arr){
+  String ArithGeo(double[] arr){
     boolean arithmetic = false;
     boolean geometric = false;
-    if(arr.length<3) return "Insufficient Numbers";
-    System.out.println(geometric);
-    if(arr[0]-arr[1]==arr[1]-arr[2]) arithmetic=true;
-    if(arr[0]/arr[1]==arr[1]/arr[2]) geometric=true;
-    System.out.println(arr[0]/arr[1]);
-    System.out.println(arr[1]/arr[2]);
+    if(arr[1]!=0 && arr[2]!=0 && arr[0]-arr[1]==arr[1]-arr[2]) arithmetic=true;
+    if(arr[1]!=0 && arr[2]!=0 && arr[0]/ arr[1]==arr[1]/arr[2]) geometric=true;
     for(int i=1; i<arr.length-2;i++){
       if(arithmetic && arr[i]-arr[i+1]!=arr[i+1]-arr[i+2]) arithmetic=false;
       if(geometric && arr[i]/arr[i+1]!=arr[i+1]/arr[i+2]) geometric=false;
     }
-    System.out.println(geometric);
     if(geometric && arithmetic) return "Arithmetic and Geometric";
     if(geometric) return "Geometric";
     if(arithmetic) return "Arithmetic";
@@ -130,7 +125,7 @@ class CodeBreaker {
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    int[] arr = {2,4,6};
+    double[] arr = {2,4,6};
     System.out.print(c.ArithGeo(arr));
   }
 
