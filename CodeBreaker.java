@@ -109,15 +109,18 @@ class CodeBreaker {
     return true;
   }
   String ArithGeo(double[] arr){
+    boolean zero = false;
     boolean arithmetic = false;
     boolean geometric = false;
-    if(arr[1]!=0 && arr[2]!=0 && arr[0]-arr[1]==arr[1]-arr[2]) arithmetic=true;
+    if(arr[0]==0 && arr[1]==0 && arr[2]==0) zero = true;
     if(arr[1]!=0 && arr[2]!=0 && arr[0]/ arr[1]==arr[1]/arr[2]) geometric=true;
+    if(arr[0]-arr[1]==arr[1]-arr[2]) arithmetic=true;
     for(int i=1; i<arr.length-2;i++){
       if(arithmetic && arr[i]-arr[i+1]!=arr[i+1]-arr[i+2]) arithmetic=false;
-      if(geometric && arr[i]/arr[i+1]!=arr[i+1]/arr[i+2]) geometric=false;
+      if((geometric && arr[i]/arr[i+1]!=arr[i+1]/arr[i+2]) || arr[2]==0) geometric=false;
+      if(arr[i+2]!=0) zero = false;
     }
-    if(geometric && arithmetic) return "Arithmetic and Geometric";
+    if((geometric || zero) && arithmetic) return "Arithmetic and Geometric";
     if(geometric) return "Geometric";
     if(arithmetic) return "Arithmetic";
     return "None";
@@ -125,7 +128,7 @@ class CodeBreaker {
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    double[] arr = {2,4,6};
+    double[] arr = {0,0,0};
     System.out.print(c.ArithGeo(arr));
   }
 
