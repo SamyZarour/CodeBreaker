@@ -154,11 +154,32 @@ class CodeBreaker {
   	}
   	return false;
   }
+  void secondGreatLow(double[] arr){
+  	double max=arr[0];
+  	double low=arr[0];
+  	double max2=arr[0];
+  	double low2=arr[0];
+  	for(int i=1; i<arr.length;i++){
+  		if(i==1){
+  			low2=arr[i];
+  			max2=arr[i];
+  		}
+  		if(arr[i]>max){
+  			max2=max;
+  			max=arr[i];
+  		}
+  		if(arr[i]<low){
+  			low2=low;
+  			low=arr[i];
+  		}
+  	}
+  	System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    double[] arr = { 3,5,-1,8,12};
-    System.out.print(c.arrayAddittion(arr));
+    double[] arr = { 8,3,16,4,1,24};
+    c.secondGreatLow(arr);
   }
 
 }
