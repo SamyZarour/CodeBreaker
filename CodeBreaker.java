@@ -125,11 +125,40 @@ class CodeBreaker {
     if(arithmetic) return "Arithmetic";
     return "None";
   }
+  boolean arrayAddittion(double[] arr){
+  	double max=arr[0];
+  	for(int i=1; i<arr.length;i++){
+  		if(arr[i]>max) max = arr[i];
+  	}
+  	double[] copy = new double[arr.length-1];
+  	int j=0;
+	for(int i=0; i<copy.length;i++){ 
+		if(arr[i]==max) j++;
+		copy[i]=arr[j];
+		j++;
+	}
+  	return arrayAdd(arr, 0, max);
+  }
+  boolean arrayAdd(double[] arr, double result, double expected){
+  	if(result==expected) return true;
+  	//It is faster to use an ArrayList but whatever let's use an array and remove an element manually
+  	for(int i=0; i<arr.length; i++){
+  		double[] copy = new double[arr.length-1];
+  		int k=0;
+  		for(int j=0; j<copy.length;j++){
+  			if(i==j) k++; 
+  			copy[j]=arr[j];
+  			k++;
+  		}
+  		if(arrayAdd(copy, result+arr[i], expected)) return true;
+  	}
+  	return false;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    double[] arr = {0,0,0};
-    System.out.print(c.ArithGeo(arr));
+    double[] arr = {5,7,16,1,2};
+    System.out.print(c.arrayAddittion(arr));
   }
 
 }
