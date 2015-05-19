@@ -137,7 +137,7 @@ class CodeBreaker {
 		copy[i]=arr[j];
 		j++;
 	}
-  	return arrayAdd(arr, 0, max);
+  	return arrayAdd(copy, 0, max);
   }
   boolean arrayAdd(double[] arr, double result, double expected){
   	if(result==expected) return true;
@@ -147,7 +147,7 @@ class CodeBreaker {
   		int k=0;
   		for(int j=0; j<copy.length;j++){
   			if(i==j) k++; 
-  			copy[j]=arr[j];
+  			copy[j]=arr[k];
   			k++;
   		}
   		if(arrayAdd(copy, result+arr[i], expected)) return true;
@@ -157,7 +157,7 @@ class CodeBreaker {
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    double[] arr = {5,7,16,1,2};
+    double[] arr = { 3,5,-1,8,12};
     System.out.print(c.arrayAddittion(arr));
   }
 
