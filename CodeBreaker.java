@@ -108,7 +108,7 @@ class CodeBreaker {
     }
     return true;
   }
-  String ArithGeo(double[] arr){
+  String arithGeo(double[] arr){
     boolean zero = false;
     boolean arithmetic = false;
     boolean geometric = false;
@@ -124,6 +124,17 @@ class CodeBreaker {
     if(geometric) return "Geometric";
     if(arithmetic) return "Arithmetic";
     return "None";
+  }
+  String letterCountI(String str){
+    String answer;
+    int max=0;
+    int[] letters;
+    for(int i=0; i<str.length();i++){
+      if(space) letters = new int[26];
+      letters[letter_index]++;
+      if(letters[letter_index]>max) answer = new word;
+    }
+
   }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
