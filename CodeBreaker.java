@@ -125,6 +125,56 @@ class CodeBreaker {
     if(arithmetic) return "Arithmetic";
     return "None";
   }
+  boolean arrayAddittion(double[] arr){
+  	double max=arr[0];
+  	for(int i=1; i<arr.length;i++){
+  		if(arr[i]>max) max = arr[i];
+  	}
+  	double[] copy = new double[arr.length-1];
+  	int j=0;
+	for(int i=0; i<copy.length;i++){
+		if(arr[i]==max) j++;
+		copy[i]=arr[j];
+		j++;
+	}
+  	return arrayAdd(copy, 0, max);
+  }
+  boolean arrayAdd(double[] arr, double result, double expected){
+  	if(result==expected) return true;
+  	//It is faster to use an ArrayList but whatever let's use an array and remove an element manually
+  	for(int i=0; i<arr.length; i++){
+  		double[] copy = new double[arr.length-1];
+  		int k=0;
+  		for(int j=0; j<copy.length;j++){
+  			if(i==j) k++;
+  			copy[j]=arr[k];
+  			k++;
+  		}
+  		if(arrayAdd(copy, result+arr[i], expected)) return true;
+  	}
+  	return false;
+  }
+  void secondGreatLow(double[] arr){
+  	double max=arr[0];
+  	double low=arr[0];
+  	double max2=arr[0];
+  	double low2=arr[0];
+  	for(int i=1; i<arr.length;i++){
+  		if(i==1){
+  			low2=arr[i];
+  			max2=arr[i];
+  		}
+  		if(arr[i]>max){
+  			max2=max;
+  			max=arr[i];
+  		}
+  		if(arr[i]<low){
+  			low2=low;
+  			low=arr[i];
+  		}
+  	}
+  	System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
+  }
   String letterCountI(String str){
     String answer;
     int max=0;
@@ -134,13 +184,11 @@ class CodeBreaker {
       letters[letter_index]++;
       if(letters[letter_index]>max) answer = new word;
     }
-
-  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    double[] arr = {0,0,0};
-    System.out.print(c.ArithGeo(arr));
+    double[] arr = { 8,3,16,4,1,24};
+    c.secondGreatLow(arr);
   }
 
 }
