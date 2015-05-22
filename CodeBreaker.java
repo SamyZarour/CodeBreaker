@@ -244,12 +244,6 @@ class CodeBreaker {
     }
     return result;
   }
-  boolean powerOfTwo(double num){
-    if(num==0) return true;
-    if(num==1) return true;
-    if(num%2==0) return powerOfTwo(num/2);
-    return false;
-  }
   String swapCase(String str){
     char container;
     String result = "";
@@ -272,10 +266,33 @@ class CodeBreaker {
     }
     return result;
   }
+  String thirdGreatest(String[] arr){
+    String first=arr[0];
+    String second="";
+    String third="";
+    for(int i=1; i<arr.length;i++){
+      if(arr[i].length()>third.length())third = arr[i];
+      if(arr[i].length()>second.length()){
+        third=second;
+        second=arr[i];
+      }
+      if(arr[i].length()>first.length()){
+        second=first;
+        first=arr[i];
+      }
+    }
+    return third;
+  }
+  boolean powerOfTwo(double num){
+    if(num==0) return true;
+    if(num==1) return true;
+    if(num%2==0) return powerOfTwo(num/2);
+    return false;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    int[] arr = {4,4,6,2};
-    System.out.println(c.numberAddition(s.nextLine()));
+    String[] arr = {"coder","byte","code"};
+    System.out.println(c.thirdGreatest(arr));
   }
 }
