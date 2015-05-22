@@ -132,11 +132,11 @@ class CodeBreaker {
   	}
   	double[] copy = new double[arr.length-1];
   	int j=0;
-	for(int i=0; i<copy.length;i++){
-		if(arr[i]==max) j++;
-		copy[i]=arr[j];
-		j++;
-	}
+    for(int i=0; i<copy.length;i++){
+    	if(arr[i]==max) j++;
+    	copy[i]=arr[j];
+    	j++;
+    }
   	return arrayAdd(copy, 0, max);
   }
   boolean arrayAdd(double[] arr, double result, double expected){
@@ -175,20 +175,27 @@ class CodeBreaker {
   	}
   	System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
   }
-  String letterCountI(String str){
-    String answer;
-    int max=0;
-    int[] letters;
-    for(int i=0; i<str.length();i++){
-      if(space) letters = new int[26];
-      letters[letter_index]++;
-      if(letters[letter_index]>max) answer = new word;
-    }
+  // String letterCountI(String str){
+  //   String answer;
+  //   int max=0;
+  //   int[] letters;
+  //   for(int i=0; i<str.length();i++){
+  //     if(space) letters = new int[26];
+  //     letters[letter_index]++;
+  //     if(letters[letter_index]>max) answer = new word;
+  //   }
+  // }
+  boolean powerOfTwo(double num){
+    if(num==0) return true;
+    if(num==1) return true;
+    if(num%2==0) return powerOfTwo(num/2);
+    return false;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     double[] arr = { 8,3,16,4,1,24};
-    c.secondGreatLow(arr);
+    System.out.println(c.powerOfTwo(s.nextInt()));
   }
 
 }
