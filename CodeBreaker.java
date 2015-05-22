@@ -146,19 +146,46 @@ class CodeBreaker {
   	return arrayAdd(copy, 0, max);
   }
   boolean arrayAdd(double[] arr, double result, double expected){
-  	if(result==expected) return true;
-  	//It is faster to use an ArrayList but whatever let's use an array and remove an element manually
-  	for(int i=0; i<arr.length; i++){
-  		double[] copy = new double[arr.length-1];
-  		int k=0;
-  		for(int j=0; j<copy.length;j++){
-  			if(i==j) k++;
-  			copy[j]=arr[k];
-  			k++;
-  		}
-  		if(arrayAdd(copy, result+arr[i], expected)) return true;
-  	}
-  	return false;
+    if(result==expected) return true;
+    //It is faster to use an ArrayList but whatever let's use an array and remove an element manually
+    for(int i=0; i<arr.length; i++){
+      double[] copy = new double[arr.length-1];
+      int k=0;
+      for(int j=0; j<copy.length;j++){
+        if(i==j) k++;
+        copy[j]=arr[k];
+        k++;
+      }
+      if(arrayAdd(copy, result+arr[i], expected)) return true;
+    }
+    return false;
+  }
+  String letterCountI(String str){
+    String answer="";
+    String currentWord="";
+    int current_max=0;
+    int max=0;
+    int[] letters = new int[26];
+    for(int i=0; i<str.length();i++){
+      if(str.charAt(i)==32){
+        letters = new int[26];
+        if(current_max>max) {
+          answer=currentWord;
+          max=current_max;
+        }
+        current_max=0;
+        currentWord="";
+      }
+      int letter_index=str.charAt(i);
+      if(letter_index>=65 && letter_index<=90) letter_index -=65; 
+      else if(letter_index>=97 && letter_index<=122) letter_index -=97;
+      else continue;
+      currentWord+=str.charAt(i);
+      letters[letter_index]++;
+      if(letters[letter_index]>current_max) current_max++;
+    }
+    if(max<=1) return "-1";
+    return answer;
   }
   void secondGreatLow(double[] arr){
   	double max=arr[0];
@@ -181,16 +208,6 @@ class CodeBreaker {
   	}
   	System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
   }
-  // String letterCountI(String str){
-  //   String answer;
-  //   int max=0;
-  //   int[] letters;
-  //   for(int i=0; i<str.length();i++){
-  //     if(space) letters = new int[26];
-  //     letters[letter_index]++;
-  //     if(letters[letter_index]>max) answer = new word;
-  //   }
-  // }
   boolean powerOfTwo(double num){
     if(num==0) return true;
     if(num==1) return true;
@@ -201,7 +218,7 @@ class CodeBreaker {
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     double[] arr = { 8,3,16,4,1,24};
-    System.out.println(c.alphabetSoup(s.nextLine()));
+    System.out.println(c.letterCountI(s.nextLine()));
   }
 
 }
