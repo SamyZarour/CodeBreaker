@@ -289,10 +289,23 @@ class CodeBreaker {
     if(num%2==0) return powerOfTwo(num/2);
     return false;
   }
+  int additivePersistence(int num){
+    int times=0;
+    while(num/10!=0){
+      int sum=0;
+      times++;
+      while (num > 0) {
+        sum+=num % 10;
+        num/= 10;
+      }
+      num=sum;
+    }
+    return times;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.thirdGreatest(arr));
+    System.out.println(c.additivePersistence(s.nextInt()));
   }
 }
