@@ -250,10 +250,20 @@ class CodeBreaker {
     if(num%2==0) return powerOfTwo(num/2);
     return false;
   }
+  String swapCase(String str){
+    char container;
+    String result = "";
+    for(int i=0; i<str.length(); i++){
+      container = str.charAt(i);
+      if(container>=65 && container<=90) result+= (char) (container+32);
+      if(str.charAt(i)>=97 && str.charAt(i)<=122) result+=(char)(container-32);
+    }
+    return result;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     int[] arr = {4,4,6,2};
-    System.out.println(c.dashInsert(s.nextLine()));
+    System.out.println(c.swapCase(s.nextLine()));
   }
 }
