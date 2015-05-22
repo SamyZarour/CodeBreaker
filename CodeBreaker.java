@@ -218,6 +218,23 @@ class CodeBreaker {
     }
     return result;
   }
+  boolean meanMode(int[] arr){
+    int maxCount=0;
+    int mode=arr[0];
+    int sum=0;
+    for (int i = 0; i < arr.length; ++i) {
+        int count = 0;
+        sum+=arr[i];
+        for (int j = 0; j < arr.length; ++j) {
+            if (arr[j] == arr[i]) ++count;
+        }
+        if (count > maxCount) {
+            maxCount = count;
+            mode = arr[i];
+        }
+    }
+    return mode==(sum/arr.length);
+  }
   boolean powerOfTwo(double num){
     if(num==0) return true;
     if(num==1) return true;
@@ -227,8 +244,7 @@ class CodeBreaker {
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
-    double[] arr = { 8,3,16,4,1,24};
-    System.out.println(c.divisionStringified(s.nextInt(),s.nextInt()));
+    int[] arr = {4,4,6,2};
+    System.out.println(c.meanMode(arr));
   }
-
 }
