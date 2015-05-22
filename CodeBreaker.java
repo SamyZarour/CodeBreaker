@@ -302,10 +302,23 @@ class CodeBreaker {
     }
     return times;
   }
+  int multiplicativePersistence(int num){
+    int times=0;
+    while(num/10!=0){
+      int sum=1;
+      times++;
+      while (num > 0) {
+        sum*=num % 10;
+        num/= 10;
+      }
+      num=sum;
+    }
+    return times;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.additivePersistence(s.nextInt()));
+    System.out.println(c.multiplicativePersistence(s.nextInt()));
   }
 }
