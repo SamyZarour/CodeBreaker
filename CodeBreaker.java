@@ -75,6 +75,12 @@ class CodeBreaker {
   String timeConvert(int num) {
     return ""+num/60+":"+num%60;
   }
+  String alphabetSoup(String str){
+    char[] arr = str.toCharArray();
+    Arrays.sort(arr);
+    str = str.copyValueOf(arr);
+    return str;
+  }
   Boolean abCheck(String str) {
     boolean result = false;
     for(int i=0; i<str.length();i++){
@@ -195,7 +201,7 @@ class CodeBreaker {
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     double[] arr = { 8,3,16,4,1,24};
-    System.out.println(c.powerOfTwo(s.nextInt()));
+    System.out.println(c.alphabetSoup(s.nextLine()));
   }
 
 }
