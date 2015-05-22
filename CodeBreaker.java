@@ -235,14 +235,14 @@ class CodeBreaker {
     }
     return mode==(sum/arr.length);
   }
-  String dashInsert(str){
+  String dashInsert(String str){
     String result="";
-    for(int i=0; i<length; i++){
+    for(int i=0; i<str.length(); i++){
       if(!(str.charAt(i)>=48 && str.charAt(i)<=57)) return "An element of the string is not a number.";
-      else if(str.charAt(i)%2==1){
-        if(str.charAt(i))
-      } 
+      else if(str.charAt(i)%2==1 && i+1<str.length() && str.charAt(i+1)%2==1) result+= str.charAt(i) + "-";
+      else result += str.charAt(i);
     }
+    return result;
   }
   boolean powerOfTwo(double num){
     if(num==0) return true;
@@ -254,6 +254,6 @@ class CodeBreaker {
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     int[] arr = {4,4,6,2};
-    System.out.println(c.meanMode(arr));
+    System.out.println(c.dashInsert(s.nextLine()));
   }
 }
