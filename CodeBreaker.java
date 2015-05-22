@@ -260,10 +260,22 @@ class CodeBreaker {
     }
     return result;
   }
+  int numberAddition(String str){
+    int power=0;
+    int result=0;
+    for(int i=str.length()-1; i>=0; i--){
+      if(str.charAt(i)>=48 && str.charAt(i)<=57){ 
+        result+=Math.pow(10,power)*(str.charAt(i)-48);
+        if(i-1>=0 && str.charAt(i-1)>=48 && str.charAt(i-1)<=57) power++;
+        else power=0;
+      }
+    }
+    return result;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     int[] arr = {4,4,6,2};
-    System.out.println(c.swapCase(s.nextLine()));
+    System.out.println(c.numberAddition(s.nextLine()));
   }
 }
