@@ -208,6 +208,16 @@ class CodeBreaker {
   	}
   	System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
   }
+  String divisionStringified(int num1, int num2){
+    String temp = Integer.toString((num1/num2));
+    String result="";
+    if(temp.length()<3) return temp;
+    for(int i=0; i<temp.length(); i+=3){
+      if(i+3<temp.length())result= ","+temp.substring(i,i+3)+result;
+      else result = temp.substring(i) + result;
+    }
+    return result;
+  }
   boolean powerOfTwo(double num){
     if(num==0) return true;
     if(num==1) return true;
@@ -218,7 +228,7 @@ class CodeBreaker {
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     double[] arr = { 8,3,16,4,1,24};
-    System.out.println(c.letterCountI(s.nextLine()));
+    System.out.println(c.divisionStringified(s.nextInt(),s.nextInt()));
   }
 
 }
