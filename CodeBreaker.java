@@ -235,6 +235,15 @@ class CodeBreaker {
     }
     return mode==(sum/arr.length);
   }
+  String dashInsert(str){
+    String result="";
+    for(int i=0; i<length; i++){
+      if(!(str.charAt(i)>=48 && str.charAt(i)<=57)) return "An element of the string is not a number.";
+      else if(str.charAt(i)%2==1){
+        if(str.charAt(i))
+      } 
+    }
+  }
   boolean powerOfTwo(double num){
     if(num==0) return true;
     if(num==1) return true;
