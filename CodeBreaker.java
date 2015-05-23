@@ -177,7 +177,7 @@ class CodeBreaker {
         currentWord="";
       }
       int letter_index=str.charAt(i);
-      if(letter_index>=65 && letter_index<=90) letter_index -=65; 
+      if(letter_index>=65 && letter_index<=90) letter_index -=65;
       else if(letter_index>=97 && letter_index<=122) letter_index -=97;
       else continue;
       currentWord+=str.charAt(i);
@@ -217,6 +217,22 @@ class CodeBreaker {
       else result = temp.substring(i) + result;
     }
     return result;
+  }
+  int countingMinutes(String str) {
+    int time1=0;
+    int time2=0;
+    int dash=6;
+    int difference=0;
+    if (str.charAt(1)>=48 && str.charAt(1)<=57){
+      time1=((str.charAt(0)-48)*10)+(str.charAt(1)-48);
+      dash++;
+    }
+    else time1=str.charAt(0)-48;
+    if (str.charAt(dash+2)>=48 && str.charAt(dash+2)<=57) time2=((str.charAt(dash+1)-48)*10)+(str.charAt(dash+2)-48);
+    else time2=str.charAt(dash+1)-48;
+    difference=Math.abs(time1-time2);
+    if(str.charAt(dash-2)!=str.charAt(str.length()-2)) difference+=12;
+    return difference*60;
   }
   boolean meanMode(int[] arr){
     int maxCount=0;
@@ -258,7 +274,7 @@ class CodeBreaker {
     int power=0;
     int result=0;
     for(int i=str.length()-1; i>=0; i--){
-      if(str.charAt(i)>=48 && str.charAt(i)<=57){ 
+      if(str.charAt(i)>=48 && str.charAt(i)<=57){
         result+=Math.pow(10,power)*(str.charAt(i)-48);
         if(i-1>=0 && str.charAt(i-1)>=48 && str.charAt(i-1)<=57) power++;
         else power=0;
@@ -319,6 +335,6 @@ class CodeBreaker {
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.multiplicativePersistence(s.nextInt()));
+    System.out.println(c.countingMinutes(s.nextLine()));
   }
 }
