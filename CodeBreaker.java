@@ -107,10 +107,17 @@ class CodeBreaker {
     }
     return result;
   }
-  boolean palindrom(String str){
+  boolean palindromCaseSensitive(String str){
     int length = str.length();
     for(int i=0 ;i<length/2;i++){
       if(str.charAt(i)!=str.charAt(length-i-1)) return false;
+    }
+    return true;
+  }
+  boolean palindrom(String str){
+    int length = str.length();
+    for(int i=0 ;i<length/2;i++){
+      if(str.charAt(i)!=str.charAt(length-i-1) && str.charAt(i)-32!=str.charAt(length-i-1) && str.charAt(i)+32!=str.charAt(length-i-1)) return false;
     }
     return true;
   }
@@ -331,10 +338,80 @@ class CodeBreaker {
     }
     return times;
   }
+
+/******************************************************************************************************
+MEDIUM DIFFICULTY
+******************************************************************************************************/
+
+//Brute force method
+//Would be interesting to look into more efficient ways to do this
+Boolean primeTime(int n){
+  if(n<2) return false;
+  for(int i=2; i<n; i++){
+    if(i!=n && n%i==0) return false;
+  }
+  return true;
+}
+String runLength(String str){
+  String result = "";
+  int iterator=1;
+  for(int i=0; i<str.length()-1;i++){
+    if(str.charAt(i)==str.charAt(i+1)){
+      iterator++;
+      if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+    }
+    if(str.charAt(i)!=str.charAt(i+1)){
+      result+=iterator + "" + str.charAt(i);
+      iterator=1;
+      if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+    }
+  }
+  return result;
+}
+int commonFactor(int n, int m){
+  int result=1;
+  ArrayList<Integer> dividors = new ArrayList<Integer>();
+  for(int i=1; i<=n; i++){
+    if(n%i==0) dividors.add(i);
+  }
+  for(Integer dividor : dividors){
+    if(m%dividor==0 && dividor>result) result=dividor;
+  }
+  return result;
+}
+//Continuing with the brute force approach
+int primeMover(int n){
+  int index=0;
+  int prime=0;
+  for(int i=2; i<10000; i++){
+    if(index==n) return prime;
+    if(primeTime(i)){
+      index++;
+      prime=i;
+    }
+  }
+  return prime;
+}
+boolean palindrom2(String str){
+  String str2="";
+  char container;
+  for(int i=0 ;i<str.length();i++){
+    container = str.charAt(i);
+    if((container>=65 && container<=90) || (container>=97 && container<=122)) str2+=container; ;
+  }
+  return palindrom(str2);
+}
+// boolean stringScramble(String result, String container, String remainder){
+//   if(result.equals(container)) return true;
+//   char[] arr = remainder.toCharArray();
+//   for(int i=0; i<arr.length; i++){
+
+//   }
+// }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.countingMinutes(s.nextLine()));
+    System.out.println(c.palindrom2(s.nextLine()));
   }
 }
