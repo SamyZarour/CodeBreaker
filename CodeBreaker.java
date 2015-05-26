@@ -421,11 +421,26 @@ boolean stringScrambleHelper(String result, String container, ArrayList<Characte
 String ArithGeoII(double[] arr) {
   return arithGeo(arr);
 }
+boolean arrayAddittionII(double[] arr){
+  return arrayAddittion(arr);
+}
+int binaryConverter(int num) {
+  int sum=0;
+  int pow=0;
+  while(num!=0){
+    sum+=num%10*Math.pow(2,pow);
+    pow++;
+    num/=10;
+  }
+  return sum;
+}
+String letterCountII(String str){
+  return letterCountI(str);
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.stringScramble("cdore","coder"));
-    // System.out.println(c.stringScramble(s.nextLine()));
+    System.out.println(c.binaryConverter(s.nextInt()));
   }
 }
