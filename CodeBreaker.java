@@ -401,17 +401,27 @@ boolean palindrom2(String str){
   }
   return palindrom(str2);
 }
-// boolean stringScramble(String result, String container, String remainder){
-//   if(result.equals(container)) return true;
-//   char[] arr = remainder.toCharArray();
-//   for(int i=0; i<arr.length; i++){
-
-//   }
-// }
+boolean stringScramble(String goal, String start){
+  ArrayList<Character> chars = new ArrayList<Character>();
+  for (char c : start.toCharArray()) {
+    chars.add(c);
+  }
+  return stringScrambleHelper(goal,"",chars);
+}
+boolean stringScrambleHelper(String result, String container, ArrayList<Character> remainder){
+  if(result.equals(container)  && remainder.isEmpty()) return true;
+  for(int i=0; i<remainder.size(); i++){
+    ArrayList<Character> strings = new ArrayList<Character>(remainder);
+    strings.remove(remainder.get(i));
+    if(stringScrambleHelper(result,container+remainder.get(i),strings)) return true;
+  }
+  return false;
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.palindrom2(s.nextLine()));
+    System.out.println(c.stringScramble("cdore","coder"));
+    // System.out.println(c.stringScramble(s.nextLine()));
   }
 }
