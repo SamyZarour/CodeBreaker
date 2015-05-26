@@ -417,6 +417,10 @@ boolean stringScrambleHelper(String result, String container, ArrayList<Characte
   }
   return false;
 }
+//It's the exact same instructions I don't get it...
+String ArithGeoII(double[] arr) {
+  return arithGeo(arr);
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
