@@ -437,10 +437,23 @@ int binaryConverter(int num) {
 String letterCountII(String str){
   return letterCountI(str);
 }
+String caesarCipher(String str, int num){
+
+  String result = "";
+  char container;
+  for(int i=0; i<str.length();i++){
+    container=str.charAt(i);
+    System.out.println(container + " " + (char)(container+num) + (container+((num%26))) + " " + num%26);
+    if((container>=65-(num%26) && container<=90-(num%26)) || (container>=97-(num%26) && container<122-(num%26))) result+=(char)(container+num);
+    if((container+(num%26)>90 && container+(num%26)<97) || container+(num%26)>122) result+=(char)(container+num-26);
+    if(container+(num%26)<65 || (container+(num%26)<97 && container+(num%26)>90 )) result+=(char)(container+num+26);
+  }
+  return result;
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.letterCountI(s.nextLine()));
+    System.out.println(c.caesarCipher(s.nextLine(),s.nextInt()));
   }
 }
