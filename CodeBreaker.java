@@ -441,6 +441,6 @@ String letterCountII(String str){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.binaryConverter(s.nextInt()));
+    System.out.println(c.letterCountII(s.nextLine()));
   }
 }
