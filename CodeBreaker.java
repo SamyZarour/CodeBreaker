@@ -449,11 +449,27 @@ String caesarCipher(String str, int num){
   }
   return result;
 }
+// second commit
+int simpleMode(int[] arr){
+  int maxCount=0;
+  int mode=arr[0];
+  for (int i = 0; i < arr.length; ++i) {
+      int count = 0;
+      for (int j = 0; j < arr.length; ++j) {
+          if (arr[j] == arr[i]) ++count;
+      }
+      if (count > maxCount) {
+          maxCount = count;
+          mode = arr[i];
+      }
+  }
+  return mode;
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
     int[] arrNum = {-2,10,4};
-    System.out.println(c.caesarCipher(s.nextLine(),s.nextInt()));
+    System.out.println(c.simpleMode(arrNum));
   }
 }
