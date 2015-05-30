@@ -2,6 +2,44 @@ import java.util.*;
 import java.io.*;
 
 class CodeBreaker {
+  public static int[] mergeSort(int [] list) {
+    if (list.length <= 1) {
+        return list;
+    }
+    // Split the array in half
+    int[] first = new int[list.length / 2];
+    int[] second = new int[list.length - first.length];
+    System.arraycopy(list, 0, first, 0, first.length);
+    System.arraycopy(list, first.length, second, 0, second.length);
+    mergeSort(first);
+    mergeSort(second);
+    merge(first, second, list);
+    return list;
+  }
+
+  private static void merge(int[] first, int[] second, int [] result) {
+      // Next element to consider in the first array
+      int iFirst = 0;
+      // Next element to consider in the second array
+      int iSecond = 0;
+      // Next open position in the result
+      int j = 0;
+      // As long as neither iFirst nor iSecond is past the end, move the
+      // smaller element into the result.
+      while (iFirst < first.length && iSecond < second.length) {
+          if (first[iFirst] < second[iSecond]) {
+              result[j] = first[iFirst];
+              iFirst++;
+              } else {
+              result[j] = second[iSecond];
+              iSecond++;
+          }
+          j++;
+      }
+      // copy what's left
+      System.arraycopy(first, iFirst, result, j, first.length - iFirst);
+      System.arraycopy(second, iSecond, result, j, second.length - iSecond);
+  }
   String firstReverse(String str) {
     String result ="";
     for(int i= str.length()-1; i>=0; i--){
@@ -449,7 +487,6 @@ String caesarCipher(String str, int num){
   }
   return result;
 }
-// second commit
 int simpleMode(int[] arr){
   int maxCount=0;
   int mode=arr[0];
@@ -465,11 +502,21 @@ int simpleMode(int[] arr){
   }
   return mode;
 }
+int consecutive(int[] arr){
+  mergeSort(arr);
+  int prev = arr[0];
+  int result=0;
+  for(int i=1; i<arr.length; i++){
+    if(prev!=arr[i]) result+=arr[i]-prev-1;
+    prev=arr[i];
+  }
+  return result;
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
     int[] arrNum = {-2,10,4};
-    System.out.println(c.simpleMode(arrNum));
+    System.out.println(c.consecutive(arrNum));
   }
 }
