@@ -381,140 +381,156 @@ class CodeBreaker {
 MEDIUM DIFFICULTY
 ******************************************************************************************************/
 
-//Brute force method
-//Would be interesting to look into more efficient ways to do this
-Boolean primeTime(int n){
-  if(n<2) return false;
-  for(int i=2; i<n; i++){
-    if(i!=n && n%i==0) return false;
-  }
-  return true;
-}
-String runLength(String str){
-  String result = "";
-  int iterator=1;
-  for(int i=0; i<str.length()-1;i++){
-    if(str.charAt(i)==str.charAt(i+1)){
-      iterator++;
-      if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+  //Brute force method
+  //Would be interesting to look into more efficient ways to do this
+  Boolean primeTime(int n){
+    if(n<2) return false;
+    for(int i=2; i<n; i++){
+      if(i!=n && n%i==0) return false;
     }
-    if(str.charAt(i)!=str.charAt(i+1)){
-      result+=iterator + "" + str.charAt(i);
-      iterator=1;
-      if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
-    }
+    return true;
   }
-  return result;
-}
-int commonFactor(int n, int m){
-  int result=1;
-  ArrayList<Integer> dividors = new ArrayList<Integer>();
-  for(int i=1; i<=n; i++){
-    if(n%i==0) dividors.add(i);
-  }
-  for(Integer dividor : dividors){
-    if(m%dividor==0 && dividor>result) result=dividor;
-  }
-  return result;
-}
-//Continuing with the brute force approach
-int primeMover(int n){
-  int index=0;
-  int prime=0;
-  for(int i=2; i<10000; i++){
-    if(index==n) return prime;
-    if(primeTime(i)){
-      index++;
-      prime=i;
-    }
-  }
-  return prime;
-}
-boolean palindrom2(String str){
-  String str2="";
-  char container;
-  for(int i=0 ;i<str.length();i++){
-    container = str.charAt(i);
-    if((container>=65 && container<=90) || (container>=97 && container<=122)) str2+=container; ;
-  }
-  return palindrom(str2);
-}
-boolean stringScramble(String goal, String start){
-  ArrayList<Character> chars = new ArrayList<Character>();
-  for (char c : start.toCharArray()) {
-    chars.add(c);
-  }
-  return stringScrambleHelper(goal,"",chars);
-}
-boolean stringScrambleHelper(String result, String container, ArrayList<Character> remainder){
-  if(result.equals(container)  && remainder.isEmpty()) return true;
-  for(int i=0; i<remainder.size(); i++){
-    ArrayList<Character> strings = new ArrayList<Character>(remainder);
-    strings.remove(remainder.get(i));
-    if(stringScrambleHelper(result,container+remainder.get(i),strings)) return true;
-  }
-  return false;
-}
-//It's the exact same instructions I don't get it...
-String ArithGeoII(double[] arr) {
-  return arithGeo(arr);
-}
-boolean arrayAddittionII(double[] arr){
-  return arrayAddittion(arr);
-}
-int binaryConverter(int num) {
-  int sum=0;
-  int pow=0;
-  while(num!=0){
-    sum+=num%10*Math.pow(2,pow);
-    pow++;
-    num/=10;
-  }
-  return sum;
-}
-String letterCountII(String str){
-  return letterCountI(str);
-}
-//fitst commit
-String caesarCipher(String str, int num){
-  String result = "";
-  char container;
-  for(int i=0; i<str.length();i++){
-    container=str.charAt(i);
-    if((container>=65 && container<=90 && container+(num%26)>90) || (container>=97 && container<=122 && container+(num%26)>122)) result+=(char)(container+(num%26)-26);
-    else if((container>=65 && container<=90 && container+(num%26)<65) || (container>=97 && container<=122 && container+(num%26)<97)) result+=(char)(container+(num%26)+26);
-    else result+=(char)(container+(num%26));
-  }
-  return result;
-}
-int simpleMode(int[] arr){
-  int maxCount=0;
-  int mode=arr[0];
-  for (int i = 0; i < arr.length; ++i) {
-      int count = 0;
-      for (int j = 0; j < arr.length; ++j) {
-          if (arr[j] == arr[i]) ++count;
+  String runLength(String str){
+    String result = "";
+    int iterator=1;
+    for(int i=0; i<str.length()-1;i++){
+      if(str.charAt(i)==str.charAt(i+1)){
+        iterator++;
+        if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
       }
-      if (count > maxCount) {
-          maxCount = count;
-          mode = arr[i];
+      if(str.charAt(i)!=str.charAt(i+1)){
+        result+=iterator + "" + str.charAt(i);
+        iterator=1;
+        if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
       }
+    }
+    return result;
   }
-  return mode;
-}
-int consecutive(int[] arr){
-  mergeSort(arr);
-  int prev = arr[0];
-  int result=0;
-  for(int i=1; i<arr.length; i++){
-    if(prev!=arr[i]) result+=arr[i]-prev-1;
-    prev=arr[i];
+  int commonFactor(int n, int m){
+    int result=1;
+    ArrayList<Integer> dividors = new ArrayList<Integer>();
+    for(int i=1; i<=n; i++){
+      if(n%i==0) dividors.add(i);
+    }
+    for(Integer dividor : dividors){
+      if(m%dividor==0 && dividor>result) result=dividor;
+    }
+    return result;
   }
-  return result;
-}
-String formattedDivision(int num1, int num2) {
-  return (divisionStringified(num1,num2) + "." + Integer.toString((num1*10000)/num2-num1/num2));
-}
+  //Continuing with the brute force approach
+  int primeMover(int n){
+    int index=0;
+    int prime=0;
+    for(int i=2; i<10000; i++){
+      if(index==n) return prime;
+      if(primeTime(i)){
+        index++;
+        prime=i;
+      }
+    }
+    return prime;
+  }
+  boolean palindrom2(String str){
+    String str2="";
+    char container;
+    for(int i=0 ;i<str.length();i++){
+      container = str.charAt(i);
+      if((container>=65 && container<=90) || (container>=97 && container<=122)) str2+=container; ;
+    }
+    return palindrom(str2);
+  }
+  boolean stringScramble(String goal, String start){
+    ArrayList<Character> chars = new ArrayList<Character>();
+    for (char c : start.toCharArray()) {
+      chars.add(c);
+    }
+    return stringScrambleHelper(goal,"",chars);
+  }
+  boolean stringScrambleHelper(String result, String container, ArrayList<Character> remainder){
+    if(result.equals(container)  && remainder.isEmpty()) return true;
+    for(int i=0; i<remainder.size(); i++){
+      ArrayList<Character> strings = new ArrayList<Character>(remainder);
+      strings.remove(remainder.get(i));
+      if(stringScrambleHelper(result,container+remainder.get(i),strings)) return true;
+    }
+    return false;
+  }
+  //It's the exact same instructions I don't get it...
+  String ArithGeoII(double[] arr) {
+    return arithGeo(arr);
+  }
+  boolean arrayAddittionII(double[] arr){
+    return arrayAddittion(arr);
+  }
+  int binaryConverter(int num) {
+    int sum=0;
+    int pow=0;
+    while(num!=0){
+      sum+=num%10*Math.pow(2,pow);
+      pow++;
+      num/=10;
+    }
+    return sum;
+  }
+  String letterCountII(String str){
+    return letterCountI(str);
+  }
+  //fitst commit
+  String caesarCipher(String str, int num){
+    String result = "";
+    char container;
+    for(int i=0; i<str.length();i++){
+      container=str.charAt(i);
+      if((container>=65 && container<=90 && container+(num%26)>90) || (container>=97 && container<=122 && container+(num%26)>122)) result+=(char)(container+(num%26)-26);
+      else if((container>=65 && container<=90 && container+(num%26)<65) || (container>=97 && container<=122 && container+(num%26)<97)) result+=(char)(container+(num%26)+26);
+      else result+=(char)(container+(num%26));
+    }
+    return result;
+  }
+  int simpleMode(int[] arr){
+    int maxCount=0;
+    int mode=arr[0];
+    for (int i = 0; i < arr.length; ++i) {
+        int count = 0;
+        for (int j = 0; j < arr.length; ++j) {
+            if (arr[j] == arr[i]) ++count;
+        }
+        if (count > maxCount) {
+            maxCount = count;
+            mode = arr[i];
+        }
+    }
+    return mode;
+  }
+  int consecutive(int[] arr){
+    mergeSort(arr);
+    int prev = arr[0];
+    int result=0;
+    for(int i=1; i<arr.length; i++){
+      if(prev!=arr[i]) result+=arr[i]-prev-1;
+      prev=arr[i];
+    }
+    return result;
+  }
+  String formattedDivision(int num1, int num2) {
+    return (divisionStringified(num1,num2) + "." + Integer.toString((num1*10000)/num2-num1/num2));
+  }
+  int countingMinutes2(String str) {
+    int time1=0;
+    int time2=0;
+    int dash=6;
+    int difference=0;
+    if (str.charAt(1)>=48 && str.charAt(1)<=57){
+      time1=((str.charAt(0)-48)*10)+(str.charAt(1)-48);
+      dash++;
+    }
+    else time1=str.charAt(0)-48;
+    if (str.charAt(dash+2)>=48 && str.charAt(dash+2)<=57) time2=((str.charAt(dash+1)-48)*10)+(str.charAt(dash+2)-48);
+    else time2=str.charAt(dash+1)-48;
+    difference=Math.abs(time1-time2);
+    if(str.charAt(dash-2)!=str.charAt(str.length()-2)) difference+=12;
+    return difference*60;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
