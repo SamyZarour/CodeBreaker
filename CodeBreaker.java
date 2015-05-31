@@ -512,6 +512,9 @@ int consecutive(int[] arr){
   }
   return result;
 }
+String formattedDivision(int num1, int num2) {
+  return (divisionStringified(num1,num2) + "." + Integer.toString((num1*10000)/num2-num1/num2));
+}
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
