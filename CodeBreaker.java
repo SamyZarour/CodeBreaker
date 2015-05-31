@@ -531,11 +531,30 @@ MEDIUM DIFFICULTY
     if(str.charAt(dash-2)!=str.charAt(str.length()-2)) difference+=12;
     return difference*60;
   }
+  int permutation(int num){
+    if(num<0) return -1;
+    int length = (int)(Math.log10((double) num)+1);
+    int digit1;
+    int digit2;
+    int temp;
+    for(int i=1; i<length; i++){
+      int step=0;
+      for(int j=1; i+j<=length; j++){
+        digit1 = ((num - (num/ (int) Math.pow(10,j))* (int) Math.pow(10,j))/ (int) Math.pow(10,j-1));
+        digit2 = ((num - (num/ (int) Math.pow(10,j+i))*(int) Math.pow(10,i+j))/ (int) Math.pow(10,j+i-1));
+        temp = (int) (num + (digit2-digit1)*Math.pow(10,j-1) + (digit1-digit2)*Math.pow(10,j+i-1));
+        System.out.println(step + ":" + digit1 + "," + digit2 + ";" + temp);
+        step++;
+        if(temp>num) return temp;
+      }
+    }
+    return -1;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
     int[] arrNum = {-2,10,4};
-    System.out.println(c.consecutive(arrNum));
+    System.out.println(c.permutation(s.nextInt()));
   }
 }
