@@ -536,18 +536,22 @@ MEDIUM DIFFICULTY
     int length = (int)(Math.log10((double) num)+1);
     int digit1;
     int digit2;
-    int temp;
-    for(int i=1; i<length; i++){
-      int step=0;
-      for(int j=1; i+j<=length; j++){
+      for(int j=1; i+j<length; j++){
         digit1 = ((num - (num/ (int) Math.pow(10,j))* (int) Math.pow(10,j))/ (int) Math.pow(10,j-1));
-        digit2 = ((num - (num/ (int) Math.pow(10,j+i))*(int) Math.pow(10,i+j))/ (int) Math.pow(10,j+i-1));
-        temp = (int) (num + (digit2-digit1)*Math.pow(10,j-1) + (digit1-digit2)*Math.pow(10,j+i-1));
-        System.out.println(step + ":" + digit1 + "," + digit2 + ";" + temp);
-        step++;
+        digit2 = ((num - (num/ (int) Math.pow(10,j+1))*(int) Math.pow(10,j+1))/ (int) Math.pow(10,j));
+        if(digit1<digit2) break;
+        int temp;
+        int smallestValue=-1;
+        while(j>0){
+          temp = ((num - (num/ (int) Math.pow(10,j))* (int) Math.pow(10,j))/ (int) Math.pow(10,j-1));
+          if(digit1>temp){
+            digit1=temp;
+            smallest=j;
+          }
+        }
+        int temp =(int) (num + (digit2-digit1)*Math.pow(10,j-1) + (digit1-digit2)*Math.pow(10,j+i-1));
         if(temp>num) return temp;
       }
-    }
     return -1;
   }
   public static void main(String[] args){
