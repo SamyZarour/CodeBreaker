@@ -535,6 +535,7 @@ MEDIUM DIFFICULTY
     if(num<0) return -1;
     int length = (int)(Math.log10((double) num)+1);
     int digit1;
+
     int digit2;
       for(int j=1; i+j<length; j++){
         digit1 = ((num - (num/ (int) Math.pow(10,j))* (int) Math.pow(10,j))/ (int) Math.pow(10,j-1));
