@@ -2,6 +2,44 @@ import java.util.*;
 import java.io.*;
 
 class CodeBreaker {
+  public static int[] mergeSort(int [] list) {
+    if (list.length <= 1) {
+        return list;
+    }
+    // Split the array in half
+    int[] first = new int[list.length / 2];
+    int[] second = new int[list.length - first.length];
+    System.arraycopy(list, 0, first, 0, first.length);
+    System.arraycopy(list, first.length, second, 0, second.length);
+    mergeSort(first);
+    mergeSort(second);
+    merge(first, second, list);
+    return list;
+  }
+
+  private static void merge(int[] first, int[] second, int [] result) {
+      // Next element to consider in the first array
+      int iFirst = 0;
+      // Next element to consider in the second array
+      int iSecond = 0;
+      // Next open position in the result
+      int j = 0;
+      // As long as neither iFirst nor iSecond is past the end, move the
+      // smaller element into the result.
+      while (iFirst < first.length && iSecond < second.length) {
+          if (first[iFirst] < second[iSecond]) {
+              result[j] = first[iFirst];
+              iFirst++;
+              } else {
+              result[j] = second[iSecond];
+              iSecond++;
+          }
+          j++;
+      }
+      // copy what's left
+      System.arraycopy(first, iFirst, result, j, first.length - iFirst);
+      System.arraycopy(second, iSecond, result, j, second.length - iSecond);
+  }
   String firstReverse(String str) {
     String result ="";
     for(int i= str.length()-1; i>=0; i--){
@@ -139,18 +177,18 @@ class CodeBreaker {
     return "None";
   }
   boolean arrayAddittion(double[] arr){
-  	double max=arr[0];
-  	for(int i=1; i<arr.length;i++){
-  		if(arr[i]>max) max = arr[i];
-  	}
-  	double[] copy = new double[arr.length-1];
-  	int j=0;
-    for(int i=0; i<copy.length;i++){
-    	if(arr[i]==max) j++;
-    	copy[i]=arr[j];
-    	j++;
+    double max=arr[0];
+    for(int i=1; i<arr.length;i++){
+      if(arr[i]>max) max = arr[i];
     }
-  	return arrayAdd(copy, 0, max);
+    double[] copy = new double[arr.length-1];
+    int j=0;
+    for(int i=0; i<copy.length;i++){
+      if(arr[i]==max) j++;
+      copy[i]=arr[j];
+      j++;
+    }
+    return arrayAdd(copy, 0, max);
   }
   boolean arrayAdd(double[] arr, double result, double expected){
     if(result==expected) return true;
@@ -195,25 +233,25 @@ class CodeBreaker {
     return answer;
   }
   void secondGreatLow(double[] arr){
-  	double max=arr[0];
-  	double low=arr[0];
-  	double max2=arr[0];
-  	double low2=arr[0];
-  	for(int i=1; i<arr.length;i++){
-  		if(i==1){
-  			low2=arr[i];
-  			max2=arr[i];
-  		}
-  		if(arr[i]>max){
-  			max2=max;
-  			max=arr[i];
-  		}
-  		if(arr[i]<low){
-  			low2=low;
-  			low=arr[i];
-  		}
-  	}
-  	System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
+    double max=arr[0];
+    double low=arr[0];
+    double max2=arr[0];
+    double low2=arr[0];
+    for(int i=1; i<arr.length;i++){
+      if(i==1){
+        low2=arr[i];
+        max2=arr[i];
+      }
+      if(arr[i]>max){
+        max2=max;
+        max=arr[i];
+      }
+      if(arr[i]<low){
+        low2=low;
+        low=arr[i];
+      }
+    }
+    System.out.println("2nd Lowest : " + low2 + ", 2nd Highest : "+ max2);
   }
   String divisionStringified(int num1, int num2){
     String temp = Integer.toString((num1/num2));
@@ -342,78 +380,184 @@ class CodeBreaker {
 /******************************************************************************************************
 MEDIUM DIFFICULTY
 ******************************************************************************************************/
-
-//Brute force method
-//Would be interesting to look into more efficient ways to do this
-Boolean primeTime(int n){
-  if(n<2) return false;
-  for(int i=2; i<n; i++){
-    if(i!=n && n%i==0) return false;
-  }
-  return true;
-}
-String runLength(String str){
-  String result = "";
-  int iterator=1;
-  for(int i=0; i<str.length()-1;i++){
-    if(str.charAt(i)==str.charAt(i+1)){
-      iterator++;
-      if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+  //Brute force method
+  //Would be interesting to look into more efficient ways to do this
+  Boolean primeTime(int n){
+    if(n<2) return false;
+    for(int i=2; i<n; i++){
+      if(i!=n && n%i==0) return false;
     }
-    if(str.charAt(i)!=str.charAt(i+1)){
-      result+=iterator + "" + str.charAt(i);
-      iterator=1;
-      if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+    return true;
+  }
+  String runLength(String str){
+    String result = "";
+    int iterator=1;
+    for(int i=0; i<str.length()-1;i++){
+      if(str.charAt(i)==str.charAt(i+1)){
+        iterator++;
+        if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+      }
+      if(str.charAt(i)!=str.charAt(i+1)){
+        result+=iterator + "" + str.charAt(i);
+        iterator=1;
+        if(i+1==str.length()-1) result+=iterator+""+str.charAt(i+1);
+      }
     }
+    return result;
   }
-  return result;
-}
-int commonFactor(int n, int m){
-  int result=1;
-  ArrayList<Integer> dividors = new ArrayList<Integer>();
-  for(int i=1; i<=n; i++){
-    if(n%i==0) dividors.add(i);
-  }
-  for(Integer dividor : dividors){
-    if(m%dividor==0 && dividor>result) result=dividor;
-  }
-  return result;
-}
-//Continuing with the brute force approach
-int primeMover(int n){
-  int index=0;
-  int prime=0;
-  for(int i=2; i<10000; i++){
-    if(index==n) return prime;
-    if(primeTime(i)){
-      index++;
-      prime=i;
+  int commonFactor(int n, int m){
+    int result=1;
+    ArrayList<Integer> dividors = new ArrayList<Integer>();
+    for(int i=1; i<=n; i++){
+      if(n%i==0) dividors.add(i);
     }
+    for(Integer dividor : dividors){
+      if(m%dividor==0 && dividor>result) result=dividor;
+    }
+    return result;
   }
-  return prime;
-}
-boolean palindrom2(String str){
-  String str2="";
-  char container;
-  for(int i=0 ;i<str.length();i++){
-    container = str.charAt(i);
-    if((container>=65 && container<=90) || (container>=97 && container<=122)) str2+=container; ;
+  //Continuing with the brute force approach
+  int primeMover(int n){
+    int index=0;
+    int prime=0;
+    for(int i=2; i<10000; i++){
+      if(index==n) return prime;
+      if(primeTime(i)){
+        index++;
+        prime=i;
+      }
+    }
+    return prime;
   }
-  return palindrom(str2);
-}
-boolean stringScramble(String result, String container, String remainder){
-   if(result.equals(container)) return true;
-   char[] arr = remainder.toCharArray();
-   for(int i=0; i<arr.length; i++){
-    //make sure
-    ArrayList<Char
-
-   }
- }
+  boolean palindrom2(String str){
+    String str2="";
+    char container;
+    for(int i=0 ;i<str.length();i++){
+      container = str.charAt(i);
+      if((container>=65 && container<=90) || (container>=97 && container<=122)) str2+=container; ;
+    }
+    return palindrom(str2);
+  }
+  boolean stringScramble(String goal, String start){
+    ArrayList<Character> chars = new ArrayList<Character>();
+    for (char c : start.toCharArray()) {
+      chars.add(c);
+    }
+    return stringScrambleHelper(goal,"",chars);
+  }
+  boolean stringScrambleHelper(String result, String container, ArrayList<Character> remainder){
+    if(result.equals(container)  && remainder.isEmpty()) return true;
+    for(int i=0; i<remainder.size(); i++){
+      ArrayList<Character> strings = new ArrayList<Character>(remainder);
+      strings.remove(remainder.get(i));
+      if(stringScrambleHelper(result,container+remainder.get(i),strings)) return true;
+    }
+    return false;
+  }
+  //It's the exact same instructions I don't get it...
+  String ArithGeoII(double[] arr) {
+    return arithGeo(arr);
+  }
+  boolean arrayAddittionII(double[] arr){
+    return arrayAddittion(arr);
+  }
+  int binaryConverter(int num) {
+    int sum=0;
+    int pow=0;
+    while(num!=0){
+      sum+=num%10*Math.pow(2,pow);
+      pow++;
+      num/=10;
+    }
+    return sum;
+  }
+  String letterCountII(String str){
+    return letterCountI(str);
+  }
+  //fitst commit
+  String caesarCipher(String str, int num){
+    String result = "";
+    char container;
+    for(int i=0; i<str.length();i++){
+      container=str.charAt(i);
+      if((container>=65 && container<=90 && container+(num%26)>90) || (container>=97 && container<=122 && container+(num%26)>122)) result+=(char)(container+(num%26)-26);
+      else if((container>=65 && container<=90 && container+(num%26)<65) || (container>=97 && container<=122 && container+(num%26)<97)) result+=(char)(container+(num%26)+26);
+      else result+=(char)(container+(num%26));
+    }
+    return result;
+  }
+  int simpleMode(int[] arr){
+    int maxCount=0;
+    int mode=arr[0];
+    for (int i = 0; i < arr.length; ++i) {
+        int count = 0;
+        for (int j = 0; j < arr.length; ++j) {
+            if (arr[j] == arr[i]) ++count;
+        }
+        if (count > maxCount) {
+            maxCount = count;
+            mode = arr[i];
+        }
+    }
+    return mode;
+  }
+  int consecutive(int[] arr){
+    mergeSort(arr);
+    int prev = arr[0];
+    int result=0;
+    for(int i=1; i<arr.length; i++){
+      if(prev!=arr[i]) result+=arr[i]-prev-1;
+      prev=arr[i];
+    }
+    return result;
+  }
+  String formattedDivision(int num1, int num2) {
+    return (divisionStringified(num1,num2) + "." + Integer.toString((num1*10000)/num2-num1/num2));
+  }
+  int countingMinutes2(String str) {
+    int time1=0;
+    int time2=0;
+    int dash=6;
+    int difference=0;
+    if (str.charAt(1)>=48 && str.charAt(1)<=57){
+      time1=((str.charAt(0)-48)*10)+(str.charAt(1)-48);
+      dash++;
+    }
+    else time1=str.charAt(0)-48;
+    if (str.charAt(dash+2)>=48 && str.charAt(dash+2)<=57) time2=((str.charAt(dash+1)-48)*10)+(str.charAt(dash+2)-48);
+    else time2=str.charAt(dash+1)-48;
+    difference=Math.abs(time1-time2);
+    if(str.charAt(dash-2)!=str.charAt(str.length()-2)) difference+=12;
+    return difference*60;
+  }
+  int permutation(int num){
+    if(num<0) return -1;
+    int length = (int)(Math.log10((double) num)+1);
+    int digit1;
+    int digit2;
+      for(int j=1; i+j<length; j++){
+        digit1 = ((num - (num/ (int) Math.pow(10,j))* (int) Math.pow(10,j))/ (int) Math.pow(10,j-1));
+        digit2 = ((num - (num/ (int) Math.pow(10,j+1))*(int) Math.pow(10,j+1))/ (int) Math.pow(10,j));
+        if(digit1<digit2) break;
+        int temp;
+        int smallestValue=-1;
+        while(j>0){
+          temp = ((num - (num/ (int) Math.pow(10,j))* (int) Math.pow(10,j))/ (int) Math.pow(10,j-1));
+          if(digit1>temp){
+            digit1=temp;
+            smallest=j;
+          }
+        }
+        int temp =(int) (num + (digit2-digit1)*Math.pow(10,j-1) + (digit1-digit2)*Math.pow(10,j+i-1));
+        if(temp>num) return temp;
+      }
+    return -1;
+  }
   public static void main(String[] args){
     Scanner  s = new Scanner(System.in);
     CodeBreaker c = new CodeBreaker();
     String[] arr = {"coder","byte","code"};
-    System.out.println(c.palindrom2(s.nextLine()));
+    int[] arrNum = {-2,10,4};
+    System.out.println(c.permutation(s.nextInt()));
   }
 }
