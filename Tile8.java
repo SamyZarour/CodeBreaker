@@ -7,6 +7,7 @@ public class Tile8{
   public void underNMoves(String sequence, int n){
     ArrayList<Character> myMoves = new ArrayList<Character>();
     findAnswer(sequence,0,n,' ', myMoves);
+    System.out.println(answer);
     return;
   }
   public void findAnswer(String sequence, int steps, int n, char prev, ArrayList<Character> myMoves){
@@ -16,7 +17,7 @@ public class Tile8{
       if(move!=prev){
         ArrayList<Character> container = clone(myMoves);
         container.add(move);
-        findAnswer(move(sequence,move), steps++, n, move, container);
+        findAnswer(move(sequence,move), steps++, n, opposite(move), container);
       }
     }
     return;
@@ -31,20 +32,37 @@ public class Tile8{
     int space = findSpace(sequence);
     System.out.println("Entered direction: " + direction + ", space position: " + space);
     switch (direction) {
-      case 'U': System.out.println("Moving " + direction);
-                if(space>5 && space<9) return "invalid";
-                else return switchLetters(sequence, space,space+3);
-      case 'D': System.out.println("Moving " + direction);
-                if(space<3 && space>=0) return "invalid";
-                else return switchLetters(sequence, space,space-3);
-      case 'L': System.out.println("Moving " + direction);
-                if(space%3==2) return "invalid";
-                else return switchLetters(sequence, space,space+1);
-      case 'R': System.out.println("Moving " + direction);
-                if(space%3==0) return "invalid";
-                else return switchLetters(sequence, space,space-1);
+      case 'U': if(space>5 && space<9) return "invalid";
+                else{
+                  System.out.println("Moving " + direction);
+                  return switchLetters(sequence, space,space+3);
+                }
+      case 'D': if(space<3 && space>=0) return "invalid";
+                else {
+                  System.out.println("Moving " + direction);
+                  return switchLetters(sequence, space,space-3);
+                }
+      case 'L': if(space%3==2) return "invalid";
+                else {
+                  System.out.println("Moving " + direction);
+                  return switchLetters(sequence, space,space+1);
+                }
+      case 'R': if(space%3==0) return "invalid";
+                else {
+                  System.out.println("Moving " + direction);
+                  return switchLetters(sequence, space,space-1);
+                }
       default:  System.out.println("Moving " + direction);
                 return "invalid";
+    }
+  }
+  public char opposite(char dir){
+    switch(dir){
+      case 'U': return 'D';
+      case 'L': return 'R';
+      case 'R': return 'L';
+      case 'D': return 'U';
+      default: return ' ';
     }
   }
   public String switchLetters(String sequence, int i, int j){
