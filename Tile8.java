@@ -7,8 +7,7 @@ public class Tile8{
   ArrayList<Character> minMoves = new ArrayList<Character>();
 
   public ArrayList<Character> underNMoves(String sequence, int n){
-    ArrayList<Character> myMoves = new ArrayList<Character>();
-    findAnswer(sequence,0,n,' ', myMoves);
+    findAnswer(sequence,0,n,' ', minMoves);
     return minMoves;
   }
   public void findAnswer(String sequence, int steps, int n, char prev, ArrayList<Character> myMoves){
@@ -39,13 +38,12 @@ public class Tile8{
       case 'U': if(space>5 && space<9) return "invalid";
                 else return switchLetters(sequence, space,space+3);
       case 'D': if(space<3 && space>=0) return "invalid";
-                else return switchLetters(sequence, space,space-3);
+                else return switchLetters(sequence, space-3,space);
       case 'L': if(space%3==2) return "invalid";
                 else return switchLetters(sequence, space,space+1);
       case 'R': if(space%3==0) return "invalid";
-                else return switchLetters(sequence, space,space-1);
-      default:  System.out.println("Moving " + direction);
-                return "invalid";
+                else return switchLetters(sequence, space-1,space);
+      default:  return "invalid";
     }
   }
   public char opposite(char dir){
@@ -58,11 +56,9 @@ public class Tile8{
     }
   }
   public String switchLetters(String sequence, int i, int j){
-    char[] c = sequence.toCharArray();
-    char temp = c[i];
-    c[i] = c[j];
-    c[j] = temp;
-    return new String(c);
+    String result = sequence.substring(0,i) + sequence.charAt(j) + sequence.substring(i+1,j) + sequence.charAt(i);
+    if(j<sequence.length()-1)  result+=sequence.substring(j+1);
+    return result;
   }
   public static ArrayList<Character> clone(ArrayList<Character> list) {
       ArrayList<Character> clone = new ArrayList<Character>(list.size());
@@ -71,6 +67,6 @@ public class Tile8{
   }
   public static void main(String[] args){
     Tile8 myTile = new Tile8();
-    System.out.println(myTile.underNMoves("1234 6758",5));
+    System.out.println(myTile.underNMoves("321645 78",2));
   }
 }
